@@ -1,9 +1,10 @@
 spring:
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:./h2db/sampledb;MODE=PostgreSQL
-    username: username
-    password: password
+    initialization-mode: always
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgres://ogzewobuokrnkr:a116850c94e56d8673bc3c68fee7502fc320c1f7f9dc17a84e313858fc3bb5c1@ec2-44-199-83-229.compute-1.amazonaws.com:5432/d73l30198rvh0h
+    username: ogzewobuokrnkr
+    password: a116850c94e56d8673bc3c68fee7502fc320c1f7f9dc17a84e313858fc3bb5c1
 
 doma:
   dialect: mysql

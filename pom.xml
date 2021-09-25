@@ -15,7 +15,7 @@
     <description>performance improve</description>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
     </properties>
 
     <dependencies>
@@ -71,6 +71,10 @@
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-sheets</artifactId>
             <version>v4-rev581-1.25.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
     </dependencies>
 
