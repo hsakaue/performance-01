@@ -39,7 +39,8 @@ public class UserInfoDao {
         String sql = "SELECT id, last_name, first_name, prefectures, city, blood_type, hobby1, hobby2, hobby3, hobby4, hobby5 ";
         sql = sql + "FROM user_info ";
 
-        return jdbcTemplate.queryForList(sql, UserInfo.class);
+        // return jdbcTemplate.queryForList(sql, UserInfo.class);
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<UserInfo>(UserInfo.class));
     }
     
     public UserInfo getTarget() {

@@ -63,14 +63,15 @@ public class PerformanceService {
         List<String> csvFile = readCsv();
 
         try {
+            int i = 0;
             for(String line : csvFile) {
-                int i = 0;
                 //カンマで分割した内容を配列に格納する
                 String[] data = line.split(",", -1);
 
                 //データ内容をコンソールに表示する
                 // log.info("-------------------------------");
                 //データ件数を表示
+                // 行数のインクリメント
                 i++;
                 log.info("データ書き込み" + i + "件目");
                 log.info(line);
@@ -87,7 +88,6 @@ public class PerformanceService {
                 // log.debug("趣味5:" + data[9]);
                 UserInfo userInfo = createUserInfo(data);
                 userInfoDao.insert(userInfo);
-                // 行数のインクリメント
             }
 
         } catch (Exception e) {
@@ -119,16 +119,15 @@ public class PerformanceService {
 
             //1行ずつ読み込みを行う
             while ((readLine = br.readLine()) != null) {
+                //行数のインクリメント
                 i++;
                 //データ内容をコンソールに表示する
-                log.info("-------------------------------");
+                // log.info("-------------------------------");
 
                 //データ件数を表示
                 log.info("データ読み込み" + i + "件目");
                 
                 csvFile.add(readLine);
-                //行数のインクリメント
-                i++;
             }
         } catch (Exception e) {
             log.info("csv read error", e);
