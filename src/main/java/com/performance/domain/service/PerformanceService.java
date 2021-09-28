@@ -72,6 +72,7 @@ public class PerformanceService {
                 // log.info("-------------------------------");
                 //データ件数を表示
                 log.info("データ書き込み" + i + "件目");
+                log.info(line);
                 //配列の中身を順位表示する。列数(=列名を格納した配列の要素数)分繰り返す
                 // log.debug("ユーザー性:" + data[1]);
                 // log.debug("出身都道府県:" + data[2]);
