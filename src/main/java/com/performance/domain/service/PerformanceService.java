@@ -64,13 +64,14 @@ public class PerformanceService {
 
         try {
             for(String line : csvFile) {
-                int i = 1;
+                int i = 0;
                 //カンマで分割した内容を配列に格納する
                 String[] data = line.split(",", -1);
 
                 //データ内容をコンソールに表示する
                 // log.info("-------------------------------");
                 //データ件数を表示
+                i++;
                 log.info("データ書き込み" + i + "件目");
                 log.info(line);
                 //配列の中身を順位表示する。列数(=列名を格納した配列の要素数)分繰り返す
@@ -87,7 +88,6 @@ public class PerformanceService {
                 UserInfo userInfo = createUserInfo(data);
                 userInfoDao.insert(userInfo);
                 // 行数のインクリメント
-                i++;
             }
 
         } catch (Exception e) {

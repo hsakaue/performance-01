@@ -2,11 +2,12 @@ package com.performance.domain.dao;
 
 import java.util.List;
 
+import com.performance.domain.entity.UserInfo;
+
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.performance.domain.entity.UserInfo;
 
 @Repository
 public class UserInfoDao {
@@ -47,7 +48,9 @@ public class UserInfoDao {
         sql = sql + "WHERE last_name = " + "'試験'";
         sql = sql + "AND first_name = " + "'太郎'";
 
-        return jdbcTemplate.queryForObject(sql, UserInfo.class);
+        List<UserInfo> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<UserInfo>(UserInfo.class));
+
+        return list.get(0);
     }
     
     public int searchCount() {
