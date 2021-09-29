@@ -30,17 +30,18 @@ public class PerformanceController {
         service.truncateTable();
         
         Long start = System.currentTimeMillis();
-        
+        service.saveStartTime(start);
         service.execute();
-        
         Long end = System.currentTimeMillis();
+        service.saveEndTime(end);
         try {
             googleService.execute();
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        model.addAttribute("executeTime", end - start);
+        // model.addAttribute("executeTime", end - start);
+        model.addAttribute("executeTime", service.getExecTime());
         return "result";
     }
 }

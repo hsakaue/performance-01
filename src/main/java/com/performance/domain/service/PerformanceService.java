@@ -6,13 +6,16 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.sql.Timestamp;
+
+import com.performance.domain.dao.ExecMngDao;
+import com.performance.domain.dao.UserInfoDao;
+import com.performance.domain.entity.ExecMng;
+import com.performance.domain.entity.UserInfo;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
-
-import com.performance.domain.dao.UserInfoDao;
-import com.performance.domain.entity.UserInfo;
 
 @Service
 public class PerformanceService {
@@ -21,8 +24,11 @@ public class PerformanceService {
 
     private UserInfoDao userInfoDao;
 
-    public PerformanceService(UserInfoDao userInfoDao) {
+    private ExecMngDao execMngDao;
+
+    public PerformanceService(UserInfoDao userInfoDao, ExecMngDao execMngDao) {
         this.userInfoDao = userInfoDao;
+        this.execMngDao = execMngDao;
     }
     
     public List<UserInfo> execute() {
@@ -160,5 +166,25 @@ public class PerformanceService {
     
     public void truncateTable() {
         userInfoDao.truncate();
+        execMngDao.truncate();
+    }
+
+    public void saveStartTime(Long startTime) {
+        Timestamp time = new Timestamp(startTime);
+        ExecMng entity = new ExecMng();
+        entity.setStartTime(time);
+        execMngDao.insert(entity);
+    }
+
+    public void saveEndTime(Long endTime){
+        Timestamp time = new Timestamp(endTime);
+        ExecMng entity = new ExecMng();
+        entity.setEndTime(time);
+        execMngDao.update(entity);
+    }
+
+    public long getExecTime(){
+        ExecMng entity = execMngDao.search().get(0);
+        return entity.getEndTime().getTime() - entity.getStartTime().getTime();
     }
 }
