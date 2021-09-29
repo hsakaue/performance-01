@@ -20,7 +20,7 @@ public class ExecMngDao {
 
     @Transactional
     public void insert (ExecMng entity) {
-        String sql = "INSERT INTO exec_mng (start_time, end_time)";
+        String sql = "INSERT INTO exec_mng (start_time)";
         sql = sql + " VALUES (?)";
         jdbcTemplate.update(sql, entity.getStartTime());
     }
