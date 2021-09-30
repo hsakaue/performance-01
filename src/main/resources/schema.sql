@@ -11,8 +11,3 @@ create table if not exists user_info (
     ,hobby4 varchar(256)
     ,hobby5 varchar(256)
 );
-
-create table if not exists exec_mng (
-    start_time timestamp(3)
-    , end_time timestamp(3)
-);

@@ -2,12 +2,13 @@ package com.performance.domain.dao;
 
 import java.util.List;
 
-import com.performance.domain.entity.UserInfo;
-
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.performance.domain.entity.UserInfo;
 
 @Repository
 public class UserInfoDao {
@@ -38,9 +39,8 @@ public class UserInfoDao {
     public List<UserInfo> search() {
         String sql = "SELECT id, last_name, first_name, prefectures, city, blood_type, hobby1, hobby2, hobby3, hobby4, hobby5 ";
         sql = sql + "FROM user_info ";
-
-        // return jdbcTemplate.queryForList(sql, UserInfo.class);
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<UserInfo>(UserInfo.class));
+        RowMapper<UserInfo> mapper = new BeanPropertyRowMapper<UserInfo>(UserInfo.class);
+        return jdbcTemplate.query(sql, mapper);
     }
     
     public UserInfo getTarget() {
@@ -48,10 +48,8 @@ public class UserInfoDao {
         sql = sql + "FROM user_info ";
         sql = sql + "WHERE last_name = " + "'試験'";
         sql = sql + "AND first_name = " + "'太郎'";
-
-        List<UserInfo> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<UserInfo>(UserInfo.class));
-
-        return list.get(0);
+        RowMapper<UserInfo> mapper = new BeanPropertyRowMapper<UserInfo>(UserInfo.class);
+        return jdbcTemplate.queryForObject(sql, mapper);
     }
     
     public int searchCount() {

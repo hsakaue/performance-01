@@ -6,16 +6,13 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.sql.Timestamp;
-
-import com.performance.domain.dao.ExecMngDao;
-import com.performance.domain.dao.UserInfoDao;
-import com.performance.domain.entity.ExecMng;
-import com.performance.domain.entity.UserInfo;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
+
+import com.performance.domain.dao.UserInfoDao;
+import com.performance.domain.entity.UserInfo;
 
 @Service
 public class PerformanceService {
@@ -24,16 +21,15 @@ public class PerformanceService {
 
     private UserInfoDao userInfoDao;
 
-    private ExecMngDao execMngDao;
-
-    public PerformanceService(UserInfoDao userInfoDao, ExecMngDao execMngDao) {
+    public PerformanceService(UserInfoDao userInfoDao) {
         this.userInfoDao = userInfoDao;
-        this.execMngDao = execMngDao;
     }
     
     public List<UserInfo> execute() {
         // CSVを取得・CSVファイルをDBに登録する
         uploadCsv();
+        
+        int count = userInfoDao.searchCount();
         
         UserInfo targetUser = getTarget();
         
@@ -71,29 +67,28 @@ public class PerformanceService {
         try {
             int i = 0;
             for(String line : csvFile) {
+                i++;
                 //カンマで分割した内容を配列に格納する
                 String[] data = line.split(",", -1);
-
+                
                 //データ内容をコンソールに表示する
-                // log.info("-------------------------------");
+                log.info("-------------------------------");
                 //データ件数を表示
-                // 行数のインクリメント
-                i++;
                 log.info("データ書き込み" + i + "件目");
-                log.info(line);
                 //配列の中身を順位表示する。列数(=列名を格納した配列の要素数)分繰り返す
-                // log.debug("ユーザー性:" + data[1]);
-                // log.debug("出身都道府県:" + data[2]);
-                // log.debug("ユーザー名:" + data[0]);
-                // log.debug("出身市区町村:" + data[3]);
-                // log.debug("血液型:" + data[4]);
-                // log.debug("趣味1:" + data[5]);
-                // log.debug("趣味2:" + data[6]);
-                // log.debug("趣味3:" + data[7]);
-                // log.debug("趣味4:" + data[8]);
-                // log.debug("趣味5:" + data[9]);
+                log.debug("ユーザー性:" + data[1]);
+                log.debug("出身都道府県:" + data[2]);
+                log.debug("ユーザー名:" + data[0]);
+                log.debug("出身市区町村:" + data[3]);
+                log.debug("血液型:" + data[4]);
+                log.debug("趣味1:" + data[5]);
+                log.debug("趣味2:" + data[6]);
+                log.debug("趣味3:" + data[7]);
+                log.debug("趣味4:" + data[8]);
+                log.debug("趣味5:" + data[9]);
                 UserInfo userInfo = createUserInfo(data);
                 userInfoDao.insert(userInfo);
+                // 行数のインクリメント
             }
 
         } catch (Exception e) {
@@ -125,10 +120,9 @@ public class PerformanceService {
 
             //1行ずつ読み込みを行う
             while ((readLine = br.readLine()) != null) {
-                //行数のインクリメント
                 i++;
                 //データ内容をコンソールに表示する
-                // log.info("-------------------------------");
+                log.info("-------------------------------");
 
                 //データ件数を表示
                 log.info("データ読み込み" + i + "件目");
@@ -166,25 +160,5 @@ public class PerformanceService {
     
     public void truncateTable() {
         userInfoDao.truncate();
-        execMngDao.truncate();
-    }
-
-    public void saveStartTime(Long startTime) {
-        Timestamp time = new Timestamp(startTime);
-        ExecMng entity = new ExecMng();
-        entity.setStartTime(time);
-        execMngDao.insert(entity);
-    }
-
-    public void saveEndTime(Long endTime){
-        Timestamp time = new Timestamp(endTime);
-        ExecMng entity = new ExecMng();
-        entity.setEndTime(time);
-        execMngDao.update(entity);
-    }
-
-    public long getExecTime(){
-        ExecMng entity = execMngDao.search().get(0);
-        return entity.getEndTime().getTime() - entity.getStartTime().getTime();
     }
 }
