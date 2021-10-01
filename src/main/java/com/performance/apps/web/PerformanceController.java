@@ -51,8 +51,10 @@ public class PerformanceController {
                 errorMessage = "スプレッドシートの更新でエラーが発生したので実行結果は手動で更新して下さい。";
             }
         }
+        log.info("実行完了");
         model.addAttribute("executeTime", executeTime);
         model.addAttribute("errorMessage", errorMessage);
+        log.info("confirm終了");
         return "result";
     }
 }
