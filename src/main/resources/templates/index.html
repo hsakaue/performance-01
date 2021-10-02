@@ -33,8 +33,9 @@
                     $('#btnExecute').attr('disabled' , false);
             }).done(function(data,status,xhr) {
                     $("#refResult").html(data);
-            }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+            }).fail(function(XMLHttpRequest, textStatus, errorThrown, jqXHR) {
                     alert("status:" + XMLHttpRequest.status + ",textStatus:" + textStatus + ",errorThrown:" + errorThrown);
+                    console.log(jqXHR.responseJSON);
             });
         });
         // Ajax通信 計測実行ボタンクリック
