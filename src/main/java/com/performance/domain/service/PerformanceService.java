@@ -34,7 +34,7 @@ public class PerformanceService {
         UserInfo targetUser = getTarget();
         
         // DBから検索する
-        List<UserInfo> userInfoList = userInfoDao.search();
+        List<UserInfo> userInfoList = userInfoDao.search2(targetUser);
         
         List<UserInfo> matchUserInfoList = matchingUser(targetUser, userInfoList);
         
@@ -55,60 +55,60 @@ public class PerformanceService {
 
         // Streamと比較お試し
         List<UserInfo> matchingUserList = new ArrayList<>();
-        for (UserInfo userInfo : userInfoList) {
-            if (!targetUser.getBloodType().equals(userInfo.getBloodType())) {
-                continue;
-            }
-            if (!targetUser.getCity().equals(userInfo.getCity())) {
-                continue;
-            }
-            if (
-                !(targetUser.getHobby1().equals(userInfo.getHobby1())
-                || targetUser.getHobby1().equals(userInfo.getHobby2())
-                || targetUser.getHobby1().equals(userInfo.getHobby3())
-                || targetUser.getHobby1().equals(userInfo.getHobby4())
-                || targetUser.getHobby1().equals(userInfo.getHobby5()))
-                ) {
-                continue;
-            }
-            if (
-                !(targetUser.getHobby2().equals(userInfo.getHobby1())
-                || targetUser.getHobby2().equals(userInfo.getHobby2())
-                || targetUser.getHobby2().equals(userInfo.getHobby3())
-                || targetUser.getHobby2().equals(userInfo.getHobby4())
-                || targetUser.getHobby2().equals(userInfo.getHobby5()))
-                ) {
-                continue;
-            }
-            if (
-                !(targetUser.getHobby3().equals(userInfo.getHobby1())
-                || targetUser.getHobby3().equals(userInfo.getHobby2())
-                || targetUser.getHobby3().equals(userInfo.getHobby3())
-                || targetUser.getHobby3().equals(userInfo.getHobby4())
-                || targetUser.getHobby3().equals(userInfo.getHobby5()))
-                ) {
-                continue;
-            }
-            if (
-                !(targetUser.getHobby4().equals(userInfo.getHobby1())
-                || targetUser.getHobby4().equals(userInfo.getHobby2())
-                || targetUser.getHobby4().equals(userInfo.getHobby3())
-                || targetUser.getHobby4().equals(userInfo.getHobby4())
-                || targetUser.getHobby4().equals(userInfo.getHobby5()))
-                ) {
-                continue;
-            }
-            if (
-                !(targetUser.getHobby5().equals(userInfo.getHobby1())
-                || targetUser.getHobby5().equals(userInfo.getHobby2())
-                || targetUser.getHobby5().equals(userInfo.getHobby3())
-                || targetUser.getHobby5().equals(userInfo.getHobby4())
-                || targetUser.getHobby5().equals(userInfo.getHobby5()))
-                ) {
-                continue;
-            }
-            matchingUserList.add(userInfo);
-        }
+        // for (UserInfo userInfo : userInfoList) {
+        //     if (!targetUser.getBloodType().equals(userInfo.getBloodType())) {
+        //         continue;
+        //     }
+        //     if (!targetUser.getCity().equals(userInfo.getCity())) {
+        //         continue;
+        //     }
+        //     if (
+        //         !(targetUser.getHobby1().equals(userInfo.getHobby1())
+        //         || targetUser.getHobby1().equals(userInfo.getHobby2())
+        //         || targetUser.getHobby1().equals(userInfo.getHobby3())
+        //         || targetUser.getHobby1().equals(userInfo.getHobby4())
+        //         || targetUser.getHobby1().equals(userInfo.getHobby5()))
+        //         ) {
+        //         continue;
+        //     }
+        //     if (
+        //         !(targetUser.getHobby2().equals(userInfo.getHobby1())
+        //         || targetUser.getHobby2().equals(userInfo.getHobby2())
+        //         || targetUser.getHobby2().equals(userInfo.getHobby3())
+        //         || targetUser.getHobby2().equals(userInfo.getHobby4())
+        //         || targetUser.getHobby2().equals(userInfo.getHobby5()))
+        //         ) {
+        //         continue;
+        //     }
+        //     if (
+        //         !(targetUser.getHobby3().equals(userInfo.getHobby1())
+        //         || targetUser.getHobby3().equals(userInfo.getHobby2())
+        //         || targetUser.getHobby3().equals(userInfo.getHobby3())
+        //         || targetUser.getHobby3().equals(userInfo.getHobby4())
+        //         || targetUser.getHobby3().equals(userInfo.getHobby5()))
+        //         ) {
+        //         continue;
+        //     }
+        //     if (
+        //         !(targetUser.getHobby4().equals(userInfo.getHobby1())
+        //         || targetUser.getHobby4().equals(userInfo.getHobby2())
+        //         || targetUser.getHobby4().equals(userInfo.getHobby3())
+        //         || targetUser.getHobby4().equals(userInfo.getHobby4())
+        //         || targetUser.getHobby4().equals(userInfo.getHobby5()))
+        //         ) {
+        //         continue;
+        //     }
+        //     if (
+        //         !(targetUser.getHobby5().equals(userInfo.getHobby1())
+        //         || targetUser.getHobby5().equals(userInfo.getHobby2())
+        //         || targetUser.getHobby5().equals(userInfo.getHobby3())
+        //         || targetUser.getHobby5().equals(userInfo.getHobby4())
+        //         || targetUser.getHobby5().equals(userInfo.getHobby5()))
+        //         ) {
+        //         continue;
+        //     }
+        //     matchingUserList.add(userInfo);
+        // }
         System.out.println("size : " + matchingUserList.size());
         return matchingUserList;
     }
