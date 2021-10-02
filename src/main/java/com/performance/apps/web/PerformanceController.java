@@ -41,20 +41,24 @@ public class PerformanceController {
         service.execute();
         
         Long end = System.currentTimeMillis();
+
+        log.info("csvupload完了");
+
         Long executeTime = end - start;
         String errorMessage = "";
         if(MEASURE_FLAG_ON.equals(measureFlag)) {
+            log.info("スプレ更新開始");
             try {
                 googleService.execute(executeTime);
             } catch (Exception e) {
                 log.error("スプレッドシートの更新でエラーが発生しました。", e);
                 errorMessage = "スプレッドシートの更新でエラーが発生したので実行結果は手動で更新して下さい。";
             }
+            log.info("スプレ更新完了");
         }
-        log.info("実行完了");
         model.addAttribute("executeTime", executeTime);
         model.addAttribute("errorMessage", errorMessage);
-        log.info("confirm終了");
+        log.info("/execute終了");
         return "result";
     }
 }
