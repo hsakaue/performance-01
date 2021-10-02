@@ -43,15 +43,73 @@ public class PerformanceService {
     
     private List<UserInfo> matchingUser(UserInfo targetUser, List<UserInfo> userInfoList) {
         
-        List<UserInfo> matchingUserList = userInfoList.stream()
-            .filter(user -> user.getBloodType().equals(targetUser.getBloodType()))
-            .filter(user -> user.getCity().equals(targetUser.getCity()))
-            .filter(user -> user.getHobby1().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5()))
-            .filter(user -> user.getHobby2().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5()))
-            .filter(user -> user.getHobby3().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5()))
-            .filter(user -> user.getHobby4().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5()))
-            .filter(user -> user.getHobby5().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5()))
-            .collect(Collectors.toList());
+        // List<UserInfo> matchingUserList = userInfoList.stream()
+        //     .filter(user -> user.getBloodType().equals(targetUser.getBloodType()))
+        //     .filter(user -> user.getCity().equals(targetUser.getCity()))
+        //     .filter(user -> user.getHobby1().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5()))
+        //     .filter(user -> user.getHobby2().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5()))
+        //     .filter(user -> user.getHobby3().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5()))
+        //     .filter(user -> user.getHobby4().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5()))
+        //     .filter(user -> user.getHobby5().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5()))
+        //     .collect(Collectors.toList());
+
+        // Streamと比較お試し
+        List<UserInfo> matchingUserList = new ArrayList<>();
+        for (UserInfo userInfo : userInfoList) {
+            if (!targetUser.getBloodType().equals(userInfo.getBloodType())) {
+                continue;
+            }
+            if (!targetUser.getCity().equals(userInfo.getCity())) {
+                continue;
+            }
+            if (
+                !(targetUser.getHobby1().equals(userInfo.getHobby1())
+                || targetUser.getHobby1().equals(userInfo.getHobby2())
+                || targetUser.getHobby1().equals(userInfo.getHobby3())
+                || targetUser.getHobby1().equals(userInfo.getHobby4())
+                || targetUser.getHobby1().equals(userInfo.getHobby5()))
+                ) {
+                continue;
+            }
+            if (
+                !(targetUser.getHobby2().equals(userInfo.getHobby1())
+                || targetUser.getHobby2().equals(userInfo.getHobby2())
+                || targetUser.getHobby2().equals(userInfo.getHobby3())
+                || targetUser.getHobby2().equals(userInfo.getHobby4())
+                || targetUser.getHobby2().equals(userInfo.getHobby5()))
+                ) {
+                continue;
+            }
+            if (
+                !(targetUser.getHobby3().equals(userInfo.getHobby1())
+                || targetUser.getHobby3().equals(userInfo.getHobby2())
+                || targetUser.getHobby3().equals(userInfo.getHobby3())
+                || targetUser.getHobby3().equals(userInfo.getHobby4())
+                || targetUser.getHobby3().equals(userInfo.getHobby5()))
+                ) {
+                continue;
+            }
+            if (
+                !(targetUser.getHobby4().equals(userInfo.getHobby1())
+                || targetUser.getHobby4().equals(userInfo.getHobby2())
+                || targetUser.getHobby4().equals(userInfo.getHobby3())
+                || targetUser.getHobby4().equals(userInfo.getHobby4())
+                || targetUser.getHobby4().equals(userInfo.getHobby5()))
+                ) {
+                continue;
+            }
+            if (
+                !(targetUser.getHobby5().equals(userInfo.getHobby1())
+                || targetUser.getHobby5().equals(userInfo.getHobby2())
+                || targetUser.getHobby5().equals(userInfo.getHobby3())
+                || targetUser.getHobby5().equals(userInfo.getHobby4())
+                || targetUser.getHobby5().equals(userInfo.getHobby5()))
+                ) {
+                continue;
+            }
+            matchingUserList.add(userInfo);
+        }
+        System.out.println("size : " + matchingUserList.size());
         return matchingUserList;
     }
 
