@@ -109,6 +109,7 @@ public class PerformanceService {
         //     }
         //     matchingUserList.add(userInfo);
         // }
+        matchingUserList.addAll(userInfoList);
         System.out.println("size : " + matchingUserList.size());
         return matchingUserList;
     }
