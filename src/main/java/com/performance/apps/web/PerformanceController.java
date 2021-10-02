@@ -45,6 +45,7 @@ public class PerformanceController {
         log.info("csvupload完了");
 
         Long executeTime = end - start;
+        log.info("execTime : " + executeTime);
         String errorMessage = "";
         if(MEASURE_FLAG_ON.equals(measureFlag)) {
             log.info("スプレ更新開始");
