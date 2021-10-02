@@ -74,7 +74,7 @@ public class PerformanceService {
                 //データ内容をコンソールに表示する
                 // log.info("-------------------------------");
                 //データ件数を表示
-                log.info("データ書き込み" + i + "件目");
+                log.debug("データ書き込み" + i + "件目");
 
                 //配列の中身を順位表示する。列数(=列名を格納した配列の要素数)分繰り返す
                 // log.debug("ユーザー性:" + data[1]);
@@ -87,8 +87,8 @@ public class PerformanceService {
                 // log.debug("趣味3:" + data[7]);
                 // log.debug("趣味4:" + data[8]);
                 // log.debug("趣味5:" + data[9]);
-                log.debug("ユーザー性:" + data[1] + ", 出身都道府県:" + data[2] + ", ユーザー名:" + data[0] + ", 出身市区町村:" + data[3]
-                    + ", 血液型:" + data[4] + ", 趣味1:" + data[5] + ", 趣味2:" + data[6] + ", 趣味3:" + data[7] + ", 趣味4:" + data[8] + ",趣味5:" + data[9]);
+                // log.debug("ユーザー性:" + data[1] + ", 出身都道府県:" + data[2] + ", ユーザー名:" + data[0] + ", 出身市区町村:" + data[3]
+                //     + ", 血液型:" + data[4] + ", 趣味1:" + data[5] + ", 趣味2:" + data[6] + ", 趣味3:" + data[7] + ", 趣味4:" + data[8] + ",趣味5:" + data[9]);
                 UserInfo userInfo = createUserInfo(data);
                 userInfoDao.insert(userInfo);
                 // 行数のインクリメント
@@ -128,7 +128,7 @@ public class PerformanceService {
                 // log.info("-------------------------------");
 
                 //データ件数を表示
-                log.info("データ読み込み" + i + "件目");
+                log.debug("データ読み込み" + i + "件目");
                 
                 csvFile.add(readLine);
             }
