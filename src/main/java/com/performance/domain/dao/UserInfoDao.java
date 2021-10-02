@@ -53,6 +53,7 @@ public class UserInfoDao {
         sql = sql + "AND (hobby4 = '" + entity.getHobby1() + "' OR hobby4 = '" + entity.getHobby2() + "' OR hobby4 = '" + entity.getHobby3() + "' OR hobby4 = '" + entity.getHobby4() + "' OR hobby4 = '" + entity.getHobby5() + "')";
         sql = sql + "AND (hobby5 = '" + entity.getHobby1() + "' OR hobby5 = '" + entity.getHobby2() + "' OR hobby5 = '" + entity.getHobby3() + "' OR hobby5 = '" + entity.getHobby4() + "' OR hobby5 = '" + entity.getHobby5() + "')";
         RowMapper<UserInfo> mapper = new BeanPropertyRowMapper<UserInfo>(UserInfo.class);
+        System.out.println(sql);
         return jdbcTemplate.query(sql, mapper);
     }
     
