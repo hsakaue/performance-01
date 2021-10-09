@@ -137,7 +137,7 @@ public class PerformanceService {
                 userInfo.setHobby4(data[8]);
                 userInfo.setHobby5(data[9]);
                 // 特定の件のみインサートするようにする
-                if (i == 0) {
+                if (i == 1) {
                     pref = userInfo.getPrefectures();
                     city = userInfo.getCity();
                     log.info("都道府県: " + pref + ", "+ city);
