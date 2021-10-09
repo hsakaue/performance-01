@@ -113,7 +113,6 @@ public class PerformanceService {
                 //データ内容をコンソールに表示する
                 // log.info("-------------------------------");
                 //データ件数を表示
-                if (i % 100 == 0) log.info("データ書き込み" + i + "件目");
                 //配列の中身を順位表示する。列数(=列名を格納した配列の要素数)分繰り返す
                 log.debug("ユーザー姓:" + data[1]);
                 log.debug("出身都道府県:" + data[2]);
@@ -141,8 +140,10 @@ public class PerformanceService {
                 if (i == 0) {
                     pref = userInfo.getPrefectures();
                     city = userInfo.getCity();
+                    log.info("都道府県: " + pref + ", "+ city);
                 }
                 if (userInfo.getPrefectures().equals(pref) && userInfo.getCity().equals(city)) {
+                    log.info("データ書き込み" + i + "件目");
                     userInfoDao.insert(userInfo);
                 }
             }
