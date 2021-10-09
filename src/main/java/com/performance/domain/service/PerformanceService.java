@@ -102,6 +102,8 @@ public class PerformanceService {
 
         try {
             int i = 0;
+            String pref = "";
+            String city = "";
             for(String line : csvFile) {
                 // 行数のインクリメント
                 i++;
@@ -136,9 +138,13 @@ public class PerformanceService {
                 userInfo.setHobby4(data[8]);
                 userInfo.setHobby5(data[9]);
                 // 特定の件のみインサートするようにする
-//                if("".equals(userInfo.getPrefectures() + userInfo.getCity())) {
+                if (i == 0) {
+                    pref = userInfo.getPrefectures();
+                    city = userInfo.getCity();
+                }
+                if (userInfo.getPrefectures().equals(pref) && userInfo.getCity().equals(city)) {
                     userInfoDao.insert(userInfo);
-//                }
+                }
             }
 
         } catch (Exception e) {
