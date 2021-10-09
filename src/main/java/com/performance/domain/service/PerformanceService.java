@@ -143,9 +143,10 @@ public class PerformanceService {
                     log.info("都道府県: " + pref + ", "+ city);
                 }
                 if (userInfo.getPrefectures().equals(pref) && userInfo.getCity().equals(city)) {
-                    log.info("データ書き込み" + i + "件目");
+                    log.info("データ書き込み：" + i + "件目のデータを書き込み");
                     userInfoDao.insert(userInfo);
                 }
+                if (i % 100 == 0) log.info("データ書き込み："+ i + "件分完了");
             }
 
         } catch (Exception e) {
