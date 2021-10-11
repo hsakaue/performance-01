@@ -64,7 +64,6 @@ public class PerformanceService {
         }
         return;
     }
-
     public List<UserInfo> uploadExecute() {
         // CSVを取得・CSVファイルをDBに登録する
         //ファイル読み込みで使用する3つのクラス
@@ -75,7 +74,7 @@ public class PerformanceService {
 
             //読み込みファイルのインスタンス生成
             //ファイル名を指定する
-            fr = new FileReader(new File("data/userInfo.csv"), Charset.forName("SJIS"));
+            fr = new FileReader(new File("data/userInfo.csv"));
             br = new BufferedReader(fr);
 
             //読み込み行
