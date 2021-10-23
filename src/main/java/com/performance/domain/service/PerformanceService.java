@@ -2,14 +2,13 @@ package com.performance.domain.service;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.performance.domain.dao.UserInfoDao;
 import com.performance.domain.entity.UserInfo;
@@ -113,7 +112,25 @@ public class PerformanceService {
             List<UserInfo> userInfoList = new ArrayList<>();
             for(String line : csvFile) {
                 //カンマで分割した内容を配列に格納する
-                String[] data = line.split(",", -1);
+                Pattern ptn = Pattern.compile(".*新潟県,上越市.*");
+                Matcher matcher = ptn.matcher(line);
+                if (matcher.find()) {
+                    String[] data = line.split(",", -1);
+                    UserInfo userInfo = new UserInfo();
+                    userInfo.setLastName(data[0]);
+                    userInfo.setFirstName(data[1]);
+                    userInfo.setPrefectures(data[2]);
+                    userInfo.setCity(data[3]);
+                    userInfo.setBloodType(data[4]);
+                    userInfo.setHobby1(data[5]);
+                    userInfo.setHobby2(data[6]);
+                    userInfo.setHobby3(data[7]);
+                    userInfo.setHobby4(data[8]);
+                    userInfo.setHobby5(data[9]);
+                    userInfoList.add(userInfo);
+                }
+
+                // String[] data = line.split(",", -1);
                 
                 //データ内容をコンソールに表示する
                 // log.info("-------------------------------");
@@ -129,26 +146,26 @@ public class PerformanceService {
                 // log.debug("趣味3:" + data[7]);
                 // log.debug("趣味4:" + data[8]);
                 // log.debug("趣味5:" + data[9]);
-                UserInfo userInfo = new UserInfo();
+                // UserInfo userInfo = new UserInfo();
 
-                userInfo.setLastName(data[0]);
-                userInfo.setFirstName(data[1]);
-                userInfo.setPrefectures(data[2]);
-                userInfo.setCity(data[3]);
-                userInfo.setBloodType(data[4]);
-                userInfo.setHobby1(data[5]);
-                userInfo.setHobby2(data[6]);
-                userInfo.setHobby3(data[7]);
-                userInfo.setHobby4(data[8]);
-                userInfo.setHobby5(data[9]);
-                // 特定の件のみインサートするようにする
-                if("新潟県上越市".equals(userInfo.getPrefectures() + userInfo.getCity())) {
-                    // 行数のインクリメント
-                    // i++;
-                    // log.info("データ書き込み" + i + "件目");
-                    // userInfoDao.insert(userInfo);
-                    userInfoList.add(userInfo);
-                }
+                // userInfo.setLastName(data[0]);
+                // userInfo.setFirstName(data[1]);
+                // userInfo.setPrefectures(data[2]);
+                // userInfo.setCity(data[3]);
+                // userInfo.setBloodType(data[4]);
+                // userInfo.setHobby1(data[5]);
+                // userInfo.setHobby2(data[6]);
+                // userInfo.setHobby3(data[7]);
+                // userInfo.setHobby4(data[8]);
+                // userInfo.setHobby5(data[9]);
+                // // 特定の件のみインサートするようにする
+                // if("新潟県上越市".equals(userInfo.getPrefectures() + userInfo.getCity())) {
+                //     // 行数のインクリメント
+                //     // i++;
+                //     // log.info("データ書き込み" + i + "件目");
+                //     // userInfoDao.insert(userInfo);
+                //     userInfoList.add(userInfo);
+                // }
             }
             userInfoDao.insert(userInfoList);
         } catch (Exception e) {
