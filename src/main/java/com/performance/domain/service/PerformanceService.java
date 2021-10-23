@@ -71,16 +71,16 @@ public class PerformanceService {
     public List<UserInfo> uploadExecute() {
         // CSVを取得・CSVファイルをDBに登録する
         //ファイル読み込みで使用する3つのクラス
-        // FileReader fr = null;
+        FileReader fr = null;
         BufferedReader br = null;
         List<String> csvFile = new ArrayList<String>();
         try {
 
             //読み込みファイルのインスタンス生成
             //ファイル名を指定する
-            // fr = new FileReader(new File("data/userInfo.csv"));
-            InputStreamReader is = new InputStreamReader(new FileInputStream(new File("data/userInfo.csv")), StandardCharsets.UTF_8);
-            br = new BufferedReader(is);
+            fr = new FileReader(new File("data/userInfo.csv"));
+            // InputStreamReader is = new InputStreamReader(new FileInputStream(new File("data/userInfo.csv")), StandardCharsets.UTF_8);
+            br = new BufferedReader(fr);
 
             //読み込み行
             String readLine;
