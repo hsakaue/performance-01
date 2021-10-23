@@ -110,9 +110,9 @@ public class PerformanceService {
         try {
             // int i = 0;
             List<UserInfo> userInfoList = new ArrayList<>();
+            Pattern ptn = Pattern.compile(".*新潟県,上越市.*");
             for(String line : csvFile) {
                 //カンマで分割した内容を配列に格納する
-                Pattern ptn = Pattern.compile(".*新潟県,上越市.*");
                 Matcher matcher = ptn.matcher(line);
                 if (matcher.find()) {
                     String[] data = line.split(",", -1);
