@@ -81,16 +81,16 @@ public class PerformanceService {
             String readLine;
 
             //読み込み行数の管理
-            int i = 0;
+            // int i = 0;
 
             //1行ずつ読み込みを行う
             while ((readLine = br.readLine()) != null) {
-                i++;
+                // i++;
                 //データ内容をコンソールに表示する
-                log.info("-------------------------------");
+                // log.info("-------------------------------");
 
                 //データ件数を表示
-                log.info("データ読み込み" + i + "件目");
+                // log.info("データ読み込み" + i + "件目");
                 
                 csvFile.add(readLine);
             }
@@ -110,19 +110,19 @@ public class PerformanceService {
                 String[] data = line.split(",", -1);
                 
                 //データ内容をコンソールに表示する
-                log.info("-------------------------------");
+                // log.info("-------------------------------");
                 //データ件数を表示
                 //配列の中身を順位表示する。列数(=列名を格納した配列の要素数)分繰り返す
-                log.debug("ユーザー姓:" + data[1]);
-                log.debug("出身都道府県:" + data[2]);
-                log.debug("ユーザー名:" + data[0]);
-                log.debug("出身市区町村:" + data[3]);
-                log.debug("血液型:" + data[4]);
-                log.debug("趣味1:" + data[5]);
-                log.debug("趣味2:" + data[6]);
-                log.debug("趣味3:" + data[7]);
-                log.debug("趣味4:" + data[8]);
-                log.debug("趣味5:" + data[9]);
+                // log.debug("ユーザー姓:" + data[1]);
+                // log.debug("出身都道府県:" + data[2]);
+                // log.debug("ユーザー名:" + data[0]);
+                // log.debug("出身市区町村:" + data[3]);
+                // log.debug("血液型:" + data[4]);
+                // log.debug("趣味1:" + data[5]);
+                // log.debug("趣味2:" + data[6]);
+                // log.debug("趣味3:" + data[7]);
+                // log.debug("趣味4:" + data[8]);
+                // log.debug("趣味5:" + data[9]);
                 UserInfo userInfo = new UserInfo();
 
                 userInfo.setLastName(data[0]);
@@ -139,7 +139,7 @@ public class PerformanceService {
                 if("新潟県上越市".equals(userInfo.getPrefectures() + userInfo.getCity())) {
                     // 行数のインクリメント
                     i++;
-                    log.info("データ書き込み" + i + "件目");
+                    // log.info("データ書き込み" + i + "件目");
                     userInfoDao.insert(userInfo);
                 }
             }
