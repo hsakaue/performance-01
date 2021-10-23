@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.performance.domain.entity.UserInfo;
 
@@ -18,6 +19,7 @@ public class UserInfoDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Transactional
     public void insert (UserInfo entity) {
         String sql = "INSERT INTO user_info (last_name, first_name, prefectures, city, blood_type, hobby1, hobby2, hobby3, hobby4, hobby5)";
         sql = sql + " VALUES (";
@@ -32,6 +34,25 @@ public class UserInfoDao {
         sql = sql + "'" + entity.getHobby4() + "', ";
         sql = sql + "'" + entity.getHobby5() + "')";
         jdbcTemplate.execute(sql);
+    }
+
+    @Transactional
+    public void insert (List<UserInfo> entityList) {
+        entityList.forEach(entity -> {
+            String sql = "INSERT INTO user_info (last_name, first_name, prefectures, city, blood_type, hobby1, hobby2, hobby3, hobby4, hobby5)";
+            sql = sql + " VALUES (";
+            sql = sql + "'" + entity.getLastName() + "', ";
+            sql = sql + "'" + entity.getFirstName() + "', ";
+            sql = sql + "'" + entity.getPrefectures() + "', ";
+            sql = sql + "'" + entity.getCity() + "', ";
+            sql = sql + "'" + entity.getBloodType() + "', ";
+            sql = sql + "'" + entity.getHobby1() + "', ";
+            sql = sql + "'" + entity.getHobby2() + "', ";
+            sql = sql + "'" + entity.getHobby3() + "', ";
+            sql = sql + "'" + entity.getHobby4() + "', ";
+            sql = sql + "'" + entity.getHobby5() + "')";
+            jdbcTemplate.execute(sql);
+        });
     }
 
     public List<UserInfo> search() {

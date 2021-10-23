@@ -3,7 +3,6 @@ package com.performance.domain.service;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +11,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.performance.domain.dao.UserInfoDao;
 import com.performance.domain.entity.UserInfo;
@@ -65,8 +63,7 @@ public class PerformanceService {
         }
         return;
     }
-
-    @Transactional
+    
     public List<UserInfo> uploadExecute() {
         // CSVを取得・CSVファイルをDBに登録する
         //ファイル読み込みで使用する3つのクラス
@@ -108,6 +105,7 @@ public class PerformanceService {
 
         try {
             // int i = 0;
+            List<UserInfo> userInfoList = new ArrayList<>();
             for(String line : csvFile) {
                 //カンマで分割した内容を配列に格納する
                 String[] data = line.split(",", -1);
@@ -143,14 +141,15 @@ public class PerformanceService {
                     // 行数のインクリメント
                     // i++;
                     // log.info("データ書き込み" + i + "件目");
-                    userInfoDao.insert(userInfo);
+                    // userInfoDao.insert(userInfo);
+                    userInfoList.add(userInfo);
                 }
             }
-
+            userInfoDao.insert(userInfoList);
         } catch (Exception e) {
             log.info("csv read error", e);
         }
-        
+
         UserInfo targetUser = userInfoDao.getTargetUser();
         
         // DBから検索する
