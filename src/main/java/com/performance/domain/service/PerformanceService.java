@@ -2,18 +2,22 @@ package com.performance.domain.service;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.performance.domain.dao.UserInfoDao;
+import com.performance.domain.entity.UserInfo;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import com.performance.domain.dao.UserInfoDao;
-import com.performance.domain.entity.UserInfo;
 
 @Service
 public class PerformanceService {
@@ -67,15 +71,16 @@ public class PerformanceService {
     public List<UserInfo> uploadExecute() {
         // CSVを取得・CSVファイルをDBに登録する
         //ファイル読み込みで使用する3つのクラス
-        FileReader fr = null;
+        // FileReader fr = null;
         BufferedReader br = null;
         List<String> csvFile = new ArrayList<String>();
         try {
 
             //読み込みファイルのインスタンス生成
             //ファイル名を指定する
-            fr = new FileReader(new File("data/userInfo.csv"));
-            br = new BufferedReader(fr);
+            // fr = new FileReader(new File("data/userInfo.csv"));
+            InputStreamReader is = new InputStreamReader(new FileInputStream(new File("data/userInfo.csv")), StandardCharsets.UTF_8);
+            br = new BufferedReader(is);
 
             //読み込み行
             String readLine;
