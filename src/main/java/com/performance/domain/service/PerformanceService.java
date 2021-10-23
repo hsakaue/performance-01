@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.performance.domain.dao.UserInfoDao;
 import com.performance.domain.entity.UserInfo;
@@ -64,6 +65,8 @@ public class PerformanceService {
         }
         return;
     }
+
+    @Transactional
     public List<UserInfo> uploadExecute() {
         // CSVを取得・CSVファイルをDBに登録する
         //ファイル読み込みで使用する3つのクラス
@@ -104,7 +107,7 @@ public class PerformanceService {
         }
 
         try {
-            int i = 0;
+            // int i = 0;
             for(String line : csvFile) {
                 //カンマで分割した内容を配列に格納する
                 String[] data = line.split(",", -1);
@@ -138,7 +141,7 @@ public class PerformanceService {
                 // 特定の件のみインサートするようにする
                 if("新潟県上越市".equals(userInfo.getPrefectures() + userInfo.getCity())) {
                     // 行数のインクリメント
-                    i++;
+                    // i++;
                     // log.info("データ書き込み" + i + "件目");
                     userInfoDao.insert(userInfo);
                 }

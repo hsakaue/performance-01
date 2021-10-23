@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.performance.domain.entity.UserInfo;
 
@@ -19,7 +18,6 @@ public class UserInfoDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Transactional
     public void insert (UserInfo entity) {
         String sql = "INSERT INTO user_info (last_name, first_name, prefectures, city, blood_type, hobby1, hobby2, hobby3, hobby4, hobby5)";
         sql = sql + " VALUES (";
