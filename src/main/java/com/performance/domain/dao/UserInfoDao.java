@@ -66,14 +66,14 @@ public class UserInfoDao {
     public List<UserInfo> search2(UserInfo entity) {
         String sql = "SELECT id, last_name, first_name, prefectures, city, blood_type, hobby1, hobby2, hobby3, hobby4, hobby5 ";
         sql = sql + "FROM user_info ";
-        sql = sql + "WHERE blood_type = '" + entity.getBloodType() + "' AND city = '"+ entity.getCity() + "'";
+        sql = sql + "WHERE last_name || first_name <> " + "'試験太郎'";
+        sql = sql + "AND blood_type = '" + entity.getBloodType() + "'";
         sql = sql + "AND (hobby1 = '" + entity.getHobby1() + "' OR hobby1 = '" + entity.getHobby2() + "' OR hobby1 = '" + entity.getHobby3() + "' OR hobby1 = '" + entity.getHobby4() + "' OR hobby1 = '" + entity.getHobby5() + "')";
         sql = sql + "AND (hobby2 = '" + entity.getHobby1() + "' OR hobby2 = '" + entity.getHobby2() + "' OR hobby2 = '" + entity.getHobby3() + "' OR hobby2 = '" + entity.getHobby4() + "' OR hobby2 = '" + entity.getHobby5() + "')";
         sql = sql + "AND (hobby3 = '" + entity.getHobby1() + "' OR hobby3 = '" + entity.getHobby2() + "' OR hobby3 = '" + entity.getHobby3() + "' OR hobby3 = '" + entity.getHobby4() + "' OR hobby3 = '" + entity.getHobby5() + "')";
         sql = sql + "AND (hobby4 = '" + entity.getHobby1() + "' OR hobby4 = '" + entity.getHobby2() + "' OR hobby4 = '" + entity.getHobby3() + "' OR hobby4 = '" + entity.getHobby4() + "' OR hobby4 = '" + entity.getHobby5() + "')";
         sql = sql + "AND (hobby5 = '" + entity.getHobby1() + "' OR hobby5 = '" + entity.getHobby2() + "' OR hobby5 = '" + entity.getHobby3() + "' OR hobby5 = '" + entity.getHobby4() + "' OR hobby5 = '" + entity.getHobby5() + "')";
         RowMapper<UserInfo> mapper = new BeanPropertyRowMapper<UserInfo>(UserInfo.class);
-        System.out.println(sql);
         return jdbcTemplate.query(sql, mapper);
     }
     

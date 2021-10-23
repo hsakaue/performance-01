@@ -153,56 +153,57 @@ public class PerformanceService {
         UserInfo targetUser = userInfoDao.getTargetUser();
         
         // DBから検索する
-        List<UserInfo> userInfoList = userInfoDao.search();
+        // List<UserInfo> userInfoList = userInfoDao.search();
         
-        List<UserInfo> bloodMatchingUserList = new ArrayList<UserInfo>();
-        // 同じ血液型ユーザー
-        for(UserInfo user : userInfoList) {
-            if(user.getBloodType().equals(targetUser.getBloodType())) {
-                bloodMatchingUserList.add(user);
-            }
-        }
-        List<UserInfo> matchingUserList = new ArrayList<UserInfo>();
-        // 趣味1に同じ趣味を持っているユーザー
-        for(UserInfo user : bloodMatchingUserList) {
-            if(user.getHobby1().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5())) {
-                if(!matchingUserList.contains(user)) {
-                    matchingUserList.add(user);
-                }
-            }
-        }
-        // 趣味2に同じ趣味を持っているユーザー
-        for(UserInfo user : bloodMatchingUserList) {
-            if(user.getHobby2().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5())) {
-                if(!matchingUserList.contains(user)) {
-                    matchingUserList.add(user);
-                }
-            }
-        }
-        // 趣味3に同じ趣味を持っているユーザー
-        for(UserInfo user : bloodMatchingUserList) {
-            if(user.getHobby3().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5())) {
-                if(!matchingUserList.contains(user)) {
-                    matchingUserList.add(user);
-                }
-            }
-        }
-        // 趣味4に同じ趣味を持っているユーザー
-        for(UserInfo user : bloodMatchingUserList) {
-            if(user.getHobby4().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5())) {
-                if(!matchingUserList.contains(user)) {
-                    matchingUserList.add(user);
-                }
-            }
-        }
-        // 趣味5に同じ趣味を持っているユーザー
-        for(UserInfo user : bloodMatchingUserList) {
-            if(user.getHobby5().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5())) {
-                if(!matchingUserList.contains(user)) {
-                    matchingUserList.add(user);
-                }
-            }
-        }
+        // List<UserInfo> bloodMatchingUserList = new ArrayList<UserInfo>();
+        // // 同じ血液型ユーザー
+        // for(UserInfo user : userInfoList) {
+        //     if(user.getBloodType().equals(targetUser.getBloodType())) {
+        //         bloodMatchingUserList.add(user);
+        //     }
+        // }
+        // List<UserInfo> matchingUserList = new ArrayList<UserInfo>();
+        // // 趣味1に同じ趣味を持っているユーザー
+        // for(UserInfo user : bloodMatchingUserList) {
+        //     if(user.getHobby1().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5())) {
+        //         if(!matchingUserList.contains(user)) {
+        //             matchingUserList.add(user);
+        //         }
+        //     }
+        // }
+        // // 趣味2に同じ趣味を持っているユーザー
+        // for(UserInfo user : bloodMatchingUserList) {
+        //     if(user.getHobby2().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5())) {
+        //         if(!matchingUserList.contains(user)) {
+        //             matchingUserList.add(user);
+        //         }
+        //     }
+        // }
+        // // 趣味3に同じ趣味を持っているユーザー
+        // for(UserInfo user : bloodMatchingUserList) {
+        //     if(user.getHobby3().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5())) {
+        //         if(!matchingUserList.contains(user)) {
+        //             matchingUserList.add(user);
+        //         }
+        //     }
+        // }
+        // // 趣味4に同じ趣味を持っているユーザー
+        // for(UserInfo user : bloodMatchingUserList) {
+        //     if(user.getHobby4().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5())) {
+        //         if(!matchingUserList.contains(user)) {
+        //             matchingUserList.add(user);
+        //         }
+        //     }
+        // }
+        // // 趣味5に同じ趣味を持っているユーザー
+        // for(UserInfo user : bloodMatchingUserList) {
+        //     if(user.getHobby5().equals(targetUser.getHobby1()) || user.getHobby1().equals(targetUser.getHobby2()) || user.getHobby1().equals(targetUser.getHobby3()) || user.getHobby1().equals(targetUser.getHobby4()) || user.getHobby1().equals(targetUser.getHobby5())) {
+        //         if(!matchingUserList.contains(user)) {
+        //             matchingUserList.add(user);
+        //         }
+        //     }
+        // }
+        List<UserInfo> matchingUserList = userInfoDao.search2(targetUser);
         return matchingUserList;
     }
 
